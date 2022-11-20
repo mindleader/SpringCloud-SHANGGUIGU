@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grent.springcloud.mapper.PaymentMapper">
+
+    <resultMap id="BaseResultMap" type="com.grent.springcloud.entites.Payment">
+        <result column="id" property="id"/>
+        <result column="serial" property="serial"/>
+    </resultMap>
+
+    <select id="getPayment" parameterType="long" resultMap="BaseResultMap">
+        select * from payment where id = #{id};
+    </select>
+    <insert id="insertPayment" parameterType="com.grent.springcloud.entites.Payment">
+        insert into payment (id,serial) values (#{id},#{serial});
+    </insert>
+</mapper>

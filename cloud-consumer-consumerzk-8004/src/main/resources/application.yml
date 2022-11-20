@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: cloud-consumer-payment8004
+  cloud:
+    zookeeper:
+      connect-string: localhost:2181
+
+server:
+  port: 8004
+

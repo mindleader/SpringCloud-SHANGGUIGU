@@ -1,0 +1,11 @@
+
+spring:
+  application:
+    name: cloud-provider-payment8003
+  cloud:
+    zookeeper:
+      connect-string: localhost:2181
+
+server:
+  port: 8003
+
