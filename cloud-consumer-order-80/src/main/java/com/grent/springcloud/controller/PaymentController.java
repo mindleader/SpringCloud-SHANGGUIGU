@@ -1,5 +1,6 @@
 package com.grent.springcloud.controller;
 
+import com.grent.springcloud.controller.lb.MyLoadBalance;
 import com.grent.springcloud.entites.CommonResult;
 import com.grent.springcloud.entites.Payment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,9 @@ public class PaymentController {
 
     @Autowired
     RestTemplate restTemplate;
+
+    @Resource
+    MyLoadBalance myLoadBalance;
 
     private static final String  baseUrl = "http://CLOUD-PAYMENT-SERVICE";
 
@@ -62,5 +67,20 @@ public class PaymentController {
         });
 
         return instances;
+    }
+    @PostMapping("/getServiceInfo/lb")
+    public Object getServiceInfoLB(){
+        List<String> services = discoveryClient.getServices();
+        List<String> serviceName = new ArrayList<String>();
+        services.forEach(e->{
+            serviceName.add(e);
+        });
+        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
+        ServiceInstance serviceInstance = myLoadBalance.getSerInstance(instances);
+        URI uri = serviceInstance.getUri();
+        return restTemplate.getForObject(
+                uri + "/getPayment/" + 13,
+                CommonResult.class);
+        //return instances;
     }
 }
