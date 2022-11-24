@@ -25,7 +25,7 @@ eureka:
       defaultZone: http://Eureka7001.com:7001/eureka,http://Eureka7002.com:7002/eureka
   instance:
     #设置主机名
-    instance-id: "cloud-order-8001"
+    instance-id: "payment8001"
     #是否显示地址
     prefer-ip-address: true
     lease-expiration-duration-in-seconds: 30

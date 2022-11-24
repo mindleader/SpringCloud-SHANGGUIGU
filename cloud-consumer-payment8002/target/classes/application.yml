@@ -24,9 +24,15 @@ eureka:
     service-url:
       defaultZone: http://Eureka7001.com:7001/eureka,http://Eureka7002.com:7002/eureka
   instance:
-    instance-id: payment8002 # eurekaWeb页面显示的名字
+    instance-id: "payment8002" # eurekaWeb页面显示的名字
     #是否显示地址
     prefer-ip-address: true
     lease-expiration-duration-in-seconds: 30
     lease-renewal-interval-in-seconds: 30
 
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 60000
+        readTimeout: 60000

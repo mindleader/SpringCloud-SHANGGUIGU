@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.concurrent.TimeUnit;
+
 @RestController
 //@RequestMapping("/Consumer")
 public class PaymentController {
@@ -28,4 +30,14 @@ public class PaymentController {
     public CommonResult<String> insertPayment(@RequestBody Payment payment){
         return paymentService.insertPayment(payment);
     }
+
+    @PostMapping("/feign/timeout")
+    public String feignTimeout(){
+        try{
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return serverPort;
+    };
 }
