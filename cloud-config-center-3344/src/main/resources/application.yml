@@ -1,0 +1,32 @@
+server:
+  port: 3344
+
+spring:
+  application:
+    name: cloud-config-centre
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/mindleader/spring-config.git
+          search-paths:
+            - /spring-config
+          default-label: master
+  rabbitmq:
+    host: 8.142.42.76
+    username: guest
+    password: guest
+    port: 5672
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "bus-refresh"
+

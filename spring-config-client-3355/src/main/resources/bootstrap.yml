@@ -1,0 +1,29 @@
+server:
+  port: 3355
+
+spring:
+  application:
+    name: spring-config-client
+  cloud:
+    config:
+      label: master
+      name: config
+      profile: dev
+      uri: http://localhost:3344
+  rabbitmq:
+    host: 8.142.42.76
+    username: guest
+    password: guest
+    port: 5672
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+
+#暴露监控接口
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
